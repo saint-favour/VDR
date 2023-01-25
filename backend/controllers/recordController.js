@@ -1,5 +1,7 @@
 import asyncHandler from 'express-async-handler'
 import Record from '../models/recordModel.js'
+import { getMilli } from '../utils/time.js'
+import RecordComment from '../models/recordCommentModel.js'
 
 // @desc    Fetch all records
 // @route   GET /api/records
@@ -144,6 +146,45 @@ const getTopRecords = asyncHandler(async (req, res) => {
   res.json(records)
 })
 
+
+async function getRecordingComment(req, res) {
+  const comments = (await Record.findById(req.params.id)).comments.sort((a, b) => getMilli(b.createdAt) - getMilli(a.createdAt));
+  res.json({comments}).end();
+}
+
+async function addComment(req, res) {
+  const {name, comment} = req.body;
+
+  const _comment = new RecordComment({name, comment});
+
+  await Record.updateOne({_id: req.params.id}, {$push: {comments: _comment}}, {new: true, upsert: true});
+
+  res.status(204).send("Comment added!").end();
+}
+
+function deletecomment(req, res) {
+const commentId = req.params.id
+Record.findByIdAndDelete({_id: commentId}, function(err){
+  if(err){
+    res.send(err)
+  }else{
+    res.status(200).send({message: "comment deleted successfuly"})
+  }
+})
+}
+
+function updatecomment(req, res) {
+  const updatecommentId = req.params.id
+  Record.findByIdAndUpdate({_id: updatecommentId}, function(err){
+    if(err){
+      res.send(err)
+    }else{
+      res.status(200).send({message: "comment updated successfuly"})
+    }
+  })
+  }
+  
+
 export {
   getRecords,
   getRecordById,
@@ -152,4 +193,8 @@ export {
   updateRecord,
   createRecordReview,
   getTopRecords,
+  getRecordingComment,
+  addComment,
+  deletecomment,
+  updatecomment
 }
