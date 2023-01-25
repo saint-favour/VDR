@@ -1,9 +1,7 @@
 import express from "express"
 import { config } from 'dotenv'
-config()
 import morgan from "morgan"
 import path from "path"
-import colors from "colors"
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import connectDB from "./config/db.js"
 import cors from "cors"
@@ -12,10 +10,10 @@ import recordRoutes from './routes/recordRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
 
+config()
 
 //connectDB
 connectDB()
-
 
 const app = express()
 
