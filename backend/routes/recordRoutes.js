@@ -8,6 +8,8 @@ import {
   updateRecord,
   createRecordReview,
   getTopRecords,
+  getRecordingComment,
+  addComment,
 } from '../controllers/recordController.js'
 import { protect, admin } from '../middleware/authMiddleware.js'
 
@@ -19,5 +21,10 @@ router
   .get(getRecordById)
   .delete(protect, admin, deleteRecord)
   .put(protect, admin, updateRecord)
+
+router
+  .route('/:id/comments')
+    .get(getRecordingComment)
+    .post(addComment);
 
 export default router

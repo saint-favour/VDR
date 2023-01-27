@@ -1,6 +1,4 @@
-import pkg from 'mongoose'
-const { model, Schema } = pkg
-import bcrypt from 'bcryptjs'
+import { model, Schema, ObjectId } from 'mongoose'
 
 const recordSchema = new Schema(
   {
@@ -16,6 +14,12 @@ const recordSchema = new Schema(
       type: String,
       required: true,
     },
+    comments: [
+      {
+        type: ObjectId,
+        ref: "RecordComment"
+      }
+    ]
   },
   {
     timestamps: true,

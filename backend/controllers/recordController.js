@@ -166,7 +166,7 @@ async function deletecomment(req, res) {
   const {name, comment} = req.body;
 
 const commentId = new RecordComment({name, comment})
-await Record.findByIdAndDelete({_id: req.params.id}, function(err){
+await Record.findByIdAndDelete({_id: req.params.id}.commentId, function(err){
   if(err){
     res.send(err)
   }else{
@@ -178,7 +178,7 @@ await Record.findByIdAndDelete({_id: req.params.id}, function(err){
 function updatecomment(req, res) {
   const {name, comment} = req.body;
   const updatecommentId = new RecordComment({name, comment})
-  Record.findByIdAndUpdate({_id: req.params.id}, function(err){
+  Record.findByIdAndUpdate({_id: req.params.id}.updatecommentId, function(err){
     if(err){
       res.send(err)
     }else{

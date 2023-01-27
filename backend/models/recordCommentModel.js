@@ -1,6 +1,6 @@
-import mongoose, {model, Schema} from 'mongoose'
+import {model, Schema} from 'mongoose'
 
-const commentSchema = new Schema({
+const recordCommentSchema = new Schema({
    name: {
     type: String,
     required: true
@@ -27,6 +27,7 @@ const commentSchema = new Schema({
 
 ) 
 
-const RecordComment = model('comment', commentSchema)
+
+const RecordComment = model('RecordComment', recordCommentSchema);
 
 export default RecordComment
