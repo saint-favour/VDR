@@ -1,5 +1,7 @@
 import asyncHandler from 'express-async-handler'
 import Record from '../models/recordModel.js'
+import { getMilli } from '../utils/time.js'
+import RecordComment from '../models/recordCommentModel.js'
 
 // @desc    Fetch all records
 // @route   GET /api/records
@@ -144,6 +146,74 @@ const getTopRecords = asyncHandler(async (req, res) => {
   res.json(records)
 })
 
+
+async function getRecordingComment(req, res) {
+  const comments = (await Record.findById(req.params.id)).comments.sort((a, b) => getMilli(b.createdAt) - getMilli(a.createdAt));
+  res.json({comments}).end();
+}
+
+async function addComment(req, res) {
+  const {name, comment} = req.body;
+
+  const _comment = new RecordComment({name, comment});
+
+  await Record.updateOne({_id: req.params.id}, {$push: {comments: _comment}}, {new: true, upsert: true});
+
+  res.status(204).send("Comment added!").end();
+}
+
+async function deletecomment(req, res) {
+  const {name, comment} = req.body;
+
+const commentId = new RecordComment({name, comment})
+await Record.findByIdAndDelete({_id: req.params.id}, function(err){
+  if(err){
+    res.send(err)
+  }else{
+    res.status(200).send({message: "comment deleted successfuly"})
+  }
+})
+}
+
+function updatecomment(req, res) {
+  const {name, comment} = req.body;
+  const updatecommentId = new RecordComment({name, comment})
+  Record.findByIdAndUpdate({_id: req.params.id}, function(err){
+    if(err){
+      res.send(err)
+    }else{
+      res.status(200).send({message: "comment updated successfuly"})
+    }
+  })
+  }
+
+  async function likecomment(req, res){
+    try{
+      const recordId = req.body
+      const comment = await
+      comment.findById(req.params.id)
+      comment.likes.push(recordId)
+      comment.save()
+      res.status(200).send({message: 'liked'})
+    }catch (error){
+      res.status(500).send({message: 'failed'})
+    }
+  }
+
+  async function dislikecomment(req, res){
+    try{
+      const recordId = req.body
+      const comment = await
+      comment.findById(req.params.id)
+      comment.dislikes.push(recordId)
+      comment.save()
+      res.status(200).send({message: 'disliked'})
+    }catch (error){
+      res.status(500).send({message: 'failed'})
+    }
+  }
+  
+
 export {
   getRecords,
   getRecordById,
@@ -152,4 +222,10 @@ export {
   updateRecord,
   createRecordReview,
   getTopRecords,
+  getRecordingComment,
+  addComment,
+  deletecomment,
+  updatecomment,
+  likecomment,
+  dislikecomment
 }
