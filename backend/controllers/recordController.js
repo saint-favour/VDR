@@ -24,7 +24,7 @@ const getRecords = asyncHandler(async (req, res) => {
     .limit(pageSize)
     .skip(pageSize * (page - 1))
 
-  res.json({ records, page, pages: Math.ceil(count / pageSize) })
+  res.json({ records, page, pages: Math.ceil(count / pageSize) }).end();
 })
 
 // @desc    Fetch single record
@@ -61,10 +61,10 @@ const deleteRecord = asyncHandler(async (req, res) => {
 // @access  Private/Admin
 const createRecord = asyncHandler(async (req, res) => {
   const record = new Record({
-    title: 'Sample title',
+    title: req.body.title,
     user: req.user._id,
-    url: "Sample url",
-    description: 'Sample description',
+    url: req.body.url,
+    description: req.body.description
   })
 
   const createdRecord = await record.save()

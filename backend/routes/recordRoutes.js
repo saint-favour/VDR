@@ -12,8 +12,10 @@ import {
   addComment,
 } from '../controllers/recordController.js'
 import { protect, admin } from '../middleware/authMiddleware.js'
+import upload from "../config/multer";
 
-router.route('/').get(getRecords).post( admin, createRecord)
+router.route('/').get(getRecords).post( protect,admin, createRecord)
+router.route('/').get(getRecords).post(protect, upload.single('recording'), createRecord)
 router.route('/:id/reviews').post(protect, createRecordReview)
 router.get('/top', getTopRecords)
 router
