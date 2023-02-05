@@ -1,3 +1,4 @@
+import multerConfig from "../config/multer.js"
 import { Router } from 'express'
 const router = Router()
 import {
@@ -12,9 +13,9 @@ import {
   addComment,
 } from '../controllers/recordController.js'
 import { protect, admin } from '../middleware/authMiddleware.js'
-import upload from "../config/multer";
+import upload from "../config/multer.js";
 
-router.route('/').get(getRecords).post( protect,admin, createRecord)
+router.route('/dashboard').get(getRecords).post( protect,admin, createRecord)
 router.route('/').get(getRecords).post(protect, upload.single('recording'), createRecord)
 router.route('/:id/reviews').post(protect, createRecordReview)
 router.get('/top', getTopRecords)

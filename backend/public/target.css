@@ -1,0 +1,107 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    margin: 10px;
+  }
+
+  body{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  video{
+    border-radius: 15px;
+}
+
+.content{
+    width: 73%;
+}
+
+.chat{
+    width: 27%;
+
+}
+
+.item{
+    display: flex;
+    justify-content: flex-start;
+    text-align: left;
+    width: 70%;
+}
+
+
+
+.message{
+    background: rgb(137, 137, 203);
+    height: 100%;
+    border-radius: 15px;
+    /* padding: 10px; */
+}
+
+
+
+.profile {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+
+  .line{
+    width: 100%;
+    height: 1px;
+    background-color: white;
+  }
+  
+
+.inbox{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly
+}
+
+.me{
+    background: white;
+    border-radius: 15px;
+    padding: 5px;
+    text-align: end;
+    font-weight: bold;
+}
+
+.you{
+    background: rgb(94, 94, 140);
+    border-radius: 15px;
+    padding: 5px;
+    font-weight: bold;
+    color: white;
+}
+
+.sender{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input{
+    width: 80%;
+    height: 40px;
+    padding-left: 10px;
+    border-radius: 15px;
+    outline: none;
+}
+
+.us{
+    width: fit-content;
+}

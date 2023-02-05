@@ -17,6 +17,10 @@ connectDB()
 
 const app = express()
 
+app.set('view engine', 'ejs')
+
+app.use(express.static('public'))
+
 // Cors
 app.use(cors({ origin: '*' }))
 
@@ -29,6 +33,14 @@ app.use(
 )
 
 app.use(express.json())
+
+app.get('/dashboard', (req, res) =>{
+  res.render('dashboard')
+})
+
+app.get('/video', (req, res) =>{
+  res.render('video')
+})
 
 app.use('/api/records', recordRoutes)
 app.use('/api/users', userRoutes)
@@ -44,7 +56,6 @@ const PORT = process.env.PORT || 5780
 
 app.listen(8237, () => {
   console.log(
-    `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.grey.bold
-  )
+    `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)
 })
 

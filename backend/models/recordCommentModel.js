@@ -1,4 +1,5 @@
-import {model, Schema} from 'mongoose'
+import {model, Schema, mongoose} from 'mongoose'
+mongoose.set('strictQuery', true)
 
 const recordCommentSchema = new Schema({
    name: {
