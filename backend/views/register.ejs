@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register | meet</title>
+    <link rel="stylesheet" href="register.css">
+</head>
+<body>
+    <h2>register</h2>
+    <div class="register">
+      <%- include ('./partials/messages') %> 
+  <form id="register">
+    <label>
+        <b>User Name</b>
+      </label>
+      <input type="text" name="uname" id="uname" placeholder="username">
+      <br><br>
+    <label>
+      <b>Email</b>
+    </label>
+    <input type="text" name="uemail" id="uemail" placeholder="example@gmail.com">
+    <br><br>
+    <label>
+    <b>Password</b>
+  </label>
+  <input type="Password" name="Pass" id="Pass" placeholder="Password">    
+        <br><br> 
+        <div class="reg-btn">   
+  <input type="submit" name="register" id="register-btn" value="register">
+  </div>
+  <br>
+ <a href="#"><p>forgot Password</p></a>
+ <a href="login" id="registers"><p>login in</p></a>
+</form>
+    </div>
+</body>
+<script>
+  const form = document.getElementById("register");
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const data = new FormData(form);
+
+    console.log()
+
+    fetch("/api/users", {method: "POST", body: JSON.stringify({
+      username: data.get('uname'),
+      email: data.get('uemail'),
+      password: data.get('Pass')
+    }),  headers: {
+      'Content-Type': 'application/json',
+    }}).then((res) => {
+      console.log(res);
+      window.location.replace('/app/login');
+    })
+  })
+</script>
+</html>

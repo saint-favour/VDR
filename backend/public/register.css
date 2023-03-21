@@ -5,15 +5,15 @@ body
     background-color:#6abadeba;  
     font-family: 'Arial';  
 }  
-.login{  
-        width: 382px;  
-        overflow: hidden;  
-        margin: auto;  
-        margin: 20 0 0 450px;  
-        padding: 80px;  
-        background: #23463f;  
-        border-radius: 15px ;  
-          
+.register{
+        width: 382px;
+        overflow: hidden;
+        margin:  auto ;
+        /*margin: 20 0 0 450px;
+        */padding: 80px;
+        background: #23463f;
+        border-radius: 15px ;
+       
 }  
 
 label, input{
@@ -28,6 +28,13 @@ h2{
 label{  
     color: #08ffd1;  
     font-size: 17px;  
+}  
+#uname{  
+    width: 300px;  
+    height: 30px;  
+    border: none;  
+    border-radius: 3px;  
+    padding-left: 8px;  
 }  
 
 #uemail{
@@ -46,40 +53,51 @@ label{
     padding-left: 8px;  
       
 }  
-#login-btn{  
+#register{
+    width: 300px;
+    height: 30px;
+    border: none;
+    border-radius: 17px;
+    padding-left: 7px;
+    color: red;
+    
+}  
+
+
+#register-btn{
+    
+    
     width: 100px;  
     height: 30px;  
     border: none;  
     border-radius: 3px;  
     padding-left: 8px;
-  
-}  
+}
 
-.log-btn{
+.reg-btn{
     display: flex;
     justify-content: center;
-   
+
 }
 
-#login-btn:hover{
-    background-color: black;
-    color: white;
+#register-btn:hover{
+background-color: black;
+color: white;
 }
-
-span{  
-    color: white;  
-    font-size: 17px;  
-}  
-a{
-    float: right;
+  
+a{  
+    float: right;   
     text-decoration: none;
     color: black;
-    padding-left: 100px;
+    padding-left: 16px;
+    
+   
 }  
 
-/* #register{  
-    float: left;  
+/* #registers{  
+     float: left;   
     
-    /* background-color: black;  
 }   */
+
+
 

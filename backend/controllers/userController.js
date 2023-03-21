@@ -5,30 +5,27 @@ import User from '../models/userModel.js'
 // @desc    Auth user & get token
 // @route   POST /api/users/login
 // @access  Public
-const authUser = asyncHandler(async (req, res) => {
+const authUser = asyncHandler(async (req, res,) => {
   const { email, password } = req.body
 
   const user = await User.findOne({ email })
 
   if (user && (await user.matchPassword(password))) {
-    res.json({
-      _id: user._id,
-      username: user.name,
-      email: user.email,
-      isAdmin: user.isAdmin,
-      token: generateToken(user._id),
-    })
+    res.status(200).redirect('/app/dashboard')
   } else {
     res.status(401)
     throw new Error('Invalid email or password')
   }
+  authUser.save()
 })
 
 // @desc    Register a new user
-// @route   POST /api/users
+// @route   POST /app/users
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
   const { username, email, password } = req.body
+
+  console.log(req.body);
 
   const userExists = await User.findOne({ email })
 
@@ -36,21 +33,13 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(400)
     throw new Error('User already exists')
   }
-
   const user = await User.create({
     username,
     email,
     password,
   })
-
   if (user) {
-    res.status(201).json({
-      _id: user._id,
-      username: user.username,
-      email: user.email,
-      isAdmin: user.isAdmin,
-      token: generateToken(user._id),
-    })
+    res.status(201).redirect('/app/login')
   } else {
     res.status(400)
     throw new Error('Invalid user data')

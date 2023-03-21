@@ -9,6 +9,7 @@
   body{
     display: flex;
     justify-content: space-between;
+    background:linear-gradient(rgb(137, 137, 203),lightcyan)
   }
 
   video{
